@@ -25,17 +25,15 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Move to the sides
 	if Input.is_action_just_pressed("left"):
-		colliding = move_piece(Vector2(-1, 0))
+		move_piece(Vector2i.LEFT)
 	if Input.is_action_just_pressed("right"):
-		colliding = move_piece(Vector2(1, 0))
+		move_piece(Vector2i.RIGHT)
 	
 	# Rotation
 	if Input.is_action_just_pressed("turn_left"):
-		rotate_piece(-1)
+		colliding = rotate_piece(-1)
 	if Input.is_action_just_pressed("turn_right"):
-		rotate_piece(1)
-	
-	print(colliding)
+		colliding = rotate_piece(1)
 	
 	# Soft drop
 	if Input.is_action_just_pressed("soft_drop"):
@@ -59,40 +57,61 @@ func _physics_process(_delta: float) -> void:
 func move_piece(move: Vector2i) -> bool:
 	var is_colliding: bool = false
 	
+	# If it can move
 	if move.y != 0:
 		is_colliding = check_down_collisions(current_coords + move, current_rotation)
+	elif move.x != 0:
+		is_colliding = check_side_collisions(current_coords + move, current_rotation, move.sign().x)
 	
 	if !is_colliding:
 		clear_piece()
 		current_coords += move
 		draw_piece()
 	
+	# If after moving, it is colliding or not
+	is_colliding = false
 	if move.y != 0:
-		return check_down_collisions(current_coords + move, current_rotation)
-	return false
+		is_colliding = check_down_collisions(current_coords + move, current_rotation)
+	return is_colliding
 
 # Pass 1 as argument to rotate clockwise, -1 to rotate counterclockwise
-func rotate_piece(rotation_: int) -> void:
-	var next_rotation = (current_rotation + rotation_) % 4
-	for i in range(len(current_piece["rotations"][next_rotation])):
-		if current_piece["rotations"][next_rotation][i] == 1:
-			if grid.get_cell_atlas_coords(
-					1, 
-					current_coords + Vector2i(i % 4, i / 4), 
-			).y == 0:  # If there is a block here
-				pass
+func rotate_piece(rotation_: int) -> bool:
+	var next_rotation := (current_rotation + rotation_) % 4
+	var next_coords := Vector2i.ZERO
+	var can_rotate: bool = true
+	if check_down_collisions(current_coords, next_rotation) or \
+			check_side_collisions(current_coords, next_rotation, 1) or \
+			check_side_collisions(current_coords, next_rotation, -1):
+		
+		if !check_down_collisions(current_coords + Vector2i.LEFT, next_rotation) and \
+				!check_side_collisions(current_coords + Vector2i.LEFT, next_rotation, -1):
+			next_coords = Vector2i.LEFT
+		elif !check_down_collisions(current_coords + Vector2i.RIGHT, next_rotation) and \
+				!check_side_collisions(current_coords + Vector2i.RIGHT, next_rotation, 1):
+			next_coords = Vector2i.RIGHT
+		# Try to move twice to the side
+		elif !check_down_collisions(current_coords + Vector2i.LEFT * 2, next_rotation) and \
+				!check_side_collisions(current_coords + Vector2i.LEFT * 2, next_rotation, -1):
+			next_coords = Vector2i.LEFT * 2
+		elif !check_down_collisions(current_coords + Vector2i.RIGHT * 2, next_rotation) and \
+				!check_side_collisions(current_coords + Vector2i.RIGHT * 2, next_rotation, 1):
+			next_coords = Vector2i.RIGHT * 2
+		else: 
+			can_rotate = false
 	
-	clear_piece()
-	current_rotation = next_rotation
-	draw_piece()
+	if can_rotate:
+		clear_piece()
+		current_coords += next_coords
+		current_rotation = next_rotation
+		draw_piece()
+	
+	return check_down_collisions(current_coords + Vector2i.DOWN, current_rotation)
 
 func check_down_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 	var is_colliding = false 
 	
-	for i in range(len(current_piece["rotations"][current_rotation])):
-		if current_piece["rotations"][current_rotation][i] == 1 and \
-				(len(current_piece["rotations"][current_rotation]) <= i+4 or  # So that only the lowest blocks check for collisions
-				current_piece["rotations"][current_rotation][i + 4] == 0):
+	for i in range(len(current_piece["rotations"][next_rotation])):
+		if current_piece["rotations"][next_rotation][i] == 1:
 			if next_coords.y + i/4 > TOP_LINE_Y + 19 or \
 					grid.get_cell_atlas_coords(
 							1, 
@@ -101,6 +120,28 @@ func check_down_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 				is_colliding = true
 				break
 	
+	return is_colliding
+
+# Make direction=1 for right, direction=-1 for left
+func check_side_collisions(next_coords: Vector2i, next_rotation: int, direction: int) -> bool:
+	var is_colliding = false 
+	
+	for i in range(len(current_piece["rotations"][next_rotation])):
+		if current_piece["rotations"][next_rotation][i] == 1:
+			if next_coords.x + i%4 < 1 or \
+					next_coords.x + i%4 > LINE_LENGTH:
+				is_colliding = true
+				break
+			
+			if next_coords.y + i/4 < TOP_LINE_Y and \
+					(next_coords.x + i%4 < 4 or
+					next_coords.x + i%4 > LINE_LENGTH - 3):
+				is_colliding = true
+				break
+			
+			if grid.get_cell_atlas_coords(1, next_coords + Vector2i(i % 4, i / 4)).y == 0:
+				is_colliding = true
+				break
 	return is_colliding
 
 
@@ -114,11 +155,11 @@ func spawn_piece() -> void:
 	
 	draw_piece()
 
-func draw_piece() -> void:
+func draw_piece(layer: int = 2) -> void:
 	for i in range(len(current_piece["rotations"][current_rotation])):
 		if current_piece["rotations"][current_rotation][i] == 1:
 			grid.set_cell(
-					1, 
+					layer, 
 					current_coords + Vector2i(i % 4, i / 4), 
 					1, 
 					Vector2i(current_piece["color"], 0)
@@ -127,17 +168,18 @@ func draw_piece() -> void:
 func clear_piece() -> void:
 	for i in range(len(current_piece["rotations"][current_rotation])):
 		if current_piece["rotations"][current_rotation][i] == 1:  # So it doesn't delete other blocks
-			grid.set_cell(1, current_coords + Vector2i(i % 4, i / 4),)  # Empty cell
+			grid.set_cell(2, current_coords + Vector2i(i % 4, i / 4),)  # Empty cell
 
 
 func next_piece() -> void:
 	colliding = false
-	spawn_piece()
+	clear_piece()
+	draw_piece(1)
 	clear_lines()
+	spawn_piece()
 
 func clear_lines() -> void:
-	var removed_lines: int = 0
-	var lowest_line: int = 0  # The top line is 0 and the bottom one is 19.
+	var removed_lines: Array[int] = []
 	
 	# We only check the 4 lines after current_coords because these are the 
 	# only ones that may be full.
@@ -155,34 +197,29 @@ func clear_lines() -> void:
 		if !hole_in_line:
 			for i in range(LINE_LENGTH):
 				grid.set_cell(1, Vector2i(i + 1, line + current_coords.y))  # Empty cell
-			removed_lines += 1
-			# We go from top to bottom, so this will always be the lowest line :
-			# we don't need to use the max() function.
-			lowest_line = current_coords.y + line
+			removed_lines.append(current_coords.y + line)
 	
 	# Moving all cells down
-	if removed_lines > 0:
-		for line in range(lowest_line):
+	for removed_line in removed_lines:
+		for line in range(removed_line):
 			for i in range(LINE_LENGTH):
 				var cell := grid.get_cell_atlas_coords(
 						1, 
-						Vector2i(i + 1, TOP_LINE_Y + lowest_line - line)
+						Vector2i(i + 1, removed_line - line - 1)
 				)
 				grid.set_cell(
 						1, 
 						Vector2i(
 								i + 1, 
-								TOP_LINE_Y + lowest_line - line + removed_lines
+								removed_line - line
 						), 
 						1, 
 						cell
 				)
-		# In case it moves the current piece
-		draw_piece()
 
 
 func new_bag() -> Array[int]:
-	var bag: Array[int] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 0, 0]
+	var bag: Array[int] = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
 	bag.shuffle()
 	
 	return bag
@@ -190,14 +227,14 @@ func new_bag() -> Array[int]:
 
 func _on_gravity_timeout() -> void:
 	if !soft_dropping:
-		colliding = move_piece(Vector2i(0, 1))
+		colliding = move_piece(Vector2i.DOWN)
 
 
 func _on_soft_drop_timeout() -> void:
-	colliding = move_piece(Vector2i(0, 1))
+	colliding = move_piece(Vector2i.DOWN)
 
 
 func _on_letting_piece_go_timer_timeout() -> void:
 	# If still colliding
-	if colliding:
+	if check_down_collisions(current_coords + Vector2i.DOWN, current_rotation):
 		next_piece()

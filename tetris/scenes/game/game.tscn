@@ -54,7 +54,14 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array()
+layer_1/tile_data = PackedInt32Array(1507329, 1, 0, 1507330, 1, 0, 1507331, 1, 0, 1507335, 1, 0, 1507336, 1, 0, 1507337, 1, 0, 1507338, 1, 0, 1507332, 1, 0, 1507334, 1, 0, 1376262, 1, 0, 1441795, 1, 0, 1376259, 1, 0, 1376258, 1, 0, 1376257, 1, 0, 1441793, 1, 0, 1441794, 1, 0, 1441799, 1, 0, 1376263, 1, 0, 1376264, 1, 0, 1441800, 1, 0, 1441801, 1, 0, 1376265, 1, 0, 1376266, 1, 0, 1441802, 1, 0)
+layer_2/name = "piece"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
 
 [node name="GravityTimer" type="Timer" parent="."]
 autostart = true
