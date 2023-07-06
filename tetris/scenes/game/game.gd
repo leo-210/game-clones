@@ -55,23 +55,15 @@ func _physics_process(_delta: float) -> void:
 
 
 func move_piece(move: Vector2i) -> bool:
-	var is_colliding: bool = false
-	
-	# If it can move
-	if move.y != 0:
-		is_colliding = check_down_collisions(current_coords + move, current_rotation)
-	elif move.x != 0:
-		is_colliding = check_side_collisions(current_coords + move, current_rotation, move.sign().x)
+	var is_colliding := check_collisions(current_coords + move, current_rotation)
 	
 	if !is_colliding:
 		clear_piece()
 		current_coords += move
 		draw_piece()
 	
-	# If after moving, it is colliding or not
-	is_colliding = false
-	if move.y != 0:
-		is_colliding = check_down_collisions(current_coords + move, current_rotation)
+	# If after moving, it has a piece under it or not
+	is_colliding = check_collisions(current_coords + Vector2i.DOWN, current_rotation)
 	return is_colliding
 
 # Pass 1 as argument to rotate clockwise, -1 to rotate counterclockwise
@@ -79,22 +71,16 @@ func rotate_piece(rotation_: int) -> bool:
 	var next_rotation := (current_rotation + rotation_) % 4
 	var next_coords := Vector2i.ZERO
 	var can_rotate: bool = true
-	if check_down_collisions(current_coords, next_rotation) or \
-			check_side_collisions(current_coords, next_rotation, 1) or \
-			check_side_collisions(current_coords, next_rotation, -1):
-		
-		if !check_down_collisions(current_coords + Vector2i.LEFT, next_rotation) and \
-				!check_side_collisions(current_coords + Vector2i.LEFT, next_rotation, -1):
+	
+	if check_collisions(current_coords, next_rotation):
+		if !check_collisions(current_coords + Vector2i.LEFT, next_rotation):
 			next_coords = Vector2i.LEFT
-		elif !check_down_collisions(current_coords + Vector2i.RIGHT, next_rotation) and \
-				!check_side_collisions(current_coords + Vector2i.RIGHT, next_rotation, 1):
+		elif !check_collisions(current_coords + Vector2i.RIGHT, next_rotation):
 			next_coords = Vector2i.RIGHT
 		# Try to move twice to the side
-		elif !check_down_collisions(current_coords + Vector2i.LEFT * 2, next_rotation) and \
-				!check_side_collisions(current_coords + Vector2i.LEFT * 2, next_rotation, -1):
+		elif !check_collisions(current_coords + Vector2i.LEFT * 2, next_rotation):
 			next_coords = Vector2i.LEFT * 2
-		elif !check_down_collisions(current_coords + Vector2i.RIGHT * 2, next_rotation) and \
-				!check_side_collisions(current_coords + Vector2i.RIGHT * 2, next_rotation, 1):
+		elif !check_collisions(current_coords + Vector2i.RIGHT * 2, next_rotation):
 			next_coords = Vector2i.RIGHT * 2
 		else: 
 			can_rotate = false
@@ -105,37 +91,22 @@ func rotate_piece(rotation_: int) -> bool:
 		current_rotation = next_rotation
 		draw_piece()
 	
-	return check_down_collisions(current_coords + Vector2i.DOWN, current_rotation)
+	return check_collisions(current_coords + Vector2i.DOWN, current_rotation)
 
-func check_down_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
+func check_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 	var is_colliding = false 
 	
 	for i in range(len(current_piece["rotations"][next_rotation])):
 		if current_piece["rotations"][next_rotation][i] == 1:
 			if next_coords.y + i/4 > TOP_LINE_Y + 19 or \
-					grid.get_cell_atlas_coords(
-							1, 
-							next_coords + Vector2i(i % 4, i / 4), 
-					).y == 0:  # If there is a block here
-				is_colliding = true
-				break
-	
-	return is_colliding
-
-# Make direction=1 for right, direction=-1 for left
-func check_side_collisions(next_coords: Vector2i, next_rotation: int, direction: int) -> bool:
-	var is_colliding = false 
-	
-	for i in range(len(current_piece["rotations"][next_rotation])):
-		if current_piece["rotations"][next_rotation][i] == 1:
-			if next_coords.x + i%4 < 1 or \
+					next_coords.x + i%4 < 1 or \
 					next_coords.x + i%4 > LINE_LENGTH:
 				is_colliding = true
 				break
-			
 			if grid.get_cell_atlas_coords(1, next_coords + Vector2i(i % 4, i / 4)).y == 0:
 				is_colliding = true
 				break
+	
 	return is_colliding
 
 
@@ -230,5 +201,5 @@ func _on_soft_drop_timeout() -> void:
 
 func _on_letting_piece_go_timer_timeout() -> void:
 	# If still colliding
-	if check_down_collisions(current_coords + Vector2i.DOWN, current_rotation):
+	if check_collisions(current_coords + Vector2i.DOWN, current_rotation):
 		next_piece()
