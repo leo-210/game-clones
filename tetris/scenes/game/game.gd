@@ -112,8 +112,8 @@ func check_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 
 
 func spawn_piece() -> void:
-	if len(current_bag) == 0:
-		current_bag = new_bag()
+	if len(current_bag) <= 7:
+		current_bag.append_array(new_bag())
 	
 	current_piece = Blocks.blocks[current_bag.pop_back()]
 	current_coords = Vector2i(4, 1)
@@ -226,7 +226,7 @@ func hard_drop() -> void:
 
 
 func new_bag() -> Array[int]:
-	var bag: Array[int] = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
+	var bag: Array[int] = [0, 1, 2, 3, 4, 5, 6]
 	bag.shuffle()
 	
 	return bag
