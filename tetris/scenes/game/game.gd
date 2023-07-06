@@ -133,12 +133,6 @@ func check_side_collisions(next_coords: Vector2i, next_rotation: int, direction:
 				is_colliding = true
 				break
 			
-			if next_coords.y + i/4 < TOP_LINE_Y and \
-					(next_coords.x + i%4 < 4 or
-					next_coords.x + i%4 > LINE_LENGTH - 3):
-				is_colliding = true
-				break
-			
 			if grid.get_cell_atlas_coords(1, next_coords + Vector2i(i % 4, i / 4)).y == 0:
 				is_colliding = true
 				break
