@@ -120,6 +120,7 @@ func spawn_piece() -> void:
 	
 	draw_piece()
 
+# Pass ghost=1 to draw a ghost
 func draw_piece(layer: int = 2) -> void:
 	for i in range(len(current_piece["rotations"][current_rotation])):
 		if current_piece["rotations"][current_rotation][i] == 1:
@@ -129,11 +130,40 @@ func draw_piece(layer: int = 2) -> void:
 					1, 
 					Vector2i(current_piece["color"], 0)
 			)
+	
+	# Draw piece ghost
+	if layer == 2:
+		var k := 0
+		while !check_collisions(current_coords + Vector2i.DOWN * k, current_rotation):
+			k += 1
+		
+		k -= 1
+		if k > 0:
+			for i in range(len(current_piece["rotations"][current_rotation])):
+				if current_piece["rotations"][current_rotation][i] == 1:
+					grid.set_cell(
+							3, 
+							current_coords + Vector2i.DOWN * k + Vector2i(i % 4, i / 4), 
+							1, 
+							Vector2i(current_piece["color"], 1)
+					)
 
 func clear_piece() -> void:
 	for i in range(len(current_piece["rotations"][current_rotation])):
 		if current_piece["rotations"][current_rotation][i] == 1:  # So it doesn't delete other blocks
-			grid.set_cell(2, current_coords + Vector2i(i % 4, i / 4),)  # Empty cell
+			grid.set_cell(2, current_coords + Vector2i(i % 4, i / 4))
+	
+	# Clear piece ghost
+	var k := 0
+	while !check_collisions(current_coords + Vector2i.DOWN * k, current_rotation):
+		k += 1
+	
+	k -= 1
+	if k > 0:
+		for i in range(len(current_piece["rotations"][current_rotation])):
+			if current_piece["rotations"][current_rotation][i] == 1:  # So it doesn't delete other blocks
+				grid.set_cell(3, current_coords + Vector2i.DOWN * k + Vector2i(i % 4, i / 4))
+
 
 
 func next_piece() -> void:
