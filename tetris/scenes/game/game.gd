@@ -47,11 +47,12 @@ func _process(_delta: float) -> void:
 		soft_dropping = false
 		soft_drop_timer.stop()
 	
+	# Hard drop
+	if Input.is_action_just_pressed("hard_drop"):
+		hard_drop()
+	
 	if colliding and letting_piece_go_timer.is_stopped():
 		letting_piece_go_timer.start()
-
-func _physics_process(_delta: float) -> void:
-	pass
 
 
 func move_piece(move: Vector2i) -> bool:
@@ -120,7 +121,6 @@ func spawn_piece() -> void:
 	
 	draw_piece()
 
-# Pass ghost=1 to draw a ghost
 func draw_piece(layer: int = 2) -> void:
 	for i in range(len(current_piece["rotations"][current_rotation])):
 		if current_piece["rotations"][current_rotation][i] == 1:
@@ -133,7 +133,7 @@ func draw_piece(layer: int = 2) -> void:
 	
 	# Draw piece ghost
 	if layer == 2:
-		var k := 0
+		var k := 1
 		while !check_collisions(current_coords + Vector2i.DOWN * k, current_rotation):
 			k += 1
 		
@@ -154,7 +154,7 @@ func clear_piece() -> void:
 			grid.set_cell(2, current_coords + Vector2i(i % 4, i / 4))
 	
 	# Clear piece ghost
-	var k := 0
+	var k := 1
 	while !check_collisions(current_coords + Vector2i.DOWN * k, current_rotation):
 		k += 1
 	
@@ -211,6 +211,18 @@ func clear_lines() -> void:
 						1, 
 						cell
 				)
+
+
+func hard_drop() -> void:
+	var k := 1
+	while !check_collisions(current_coords + Vector2i.DOWN * k, current_rotation):
+		k += 1
+	
+	k -= 1
+	clear_piece()
+	current_coords += Vector2i.DOWN * k
+	next_piece()
+		
 
 
 func new_bag() -> Array[int]:
