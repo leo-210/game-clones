@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Blocks="*res://scripts/blocks.gd"
+EventBus="*res://scripts/event_bus.gd"
 
 [display]
 

@@ -10,12 +10,14 @@ const TOP_LINE_Y := 4
 const LINE_LENGTH := 10
 
 var current_bag: Array[int]
-var current_coords: Vector2i # The coords are at top left corner or the piece
+var current_coords: Vector2i # The coords are at top left corner of the piece
 var current_piece: Dictionary
 var current_rotation: int
+var held_piece: Dictionary = {}
 
 var soft_dropping := false
 var colliding := false
+var can_hold := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,6 +52,21 @@ func _process(_delta: float) -> void:
 	# Hard drop
 	if Input.is_action_just_pressed("hard_drop"):
 		hard_drop()
+	
+	# Hold
+	if Input.is_action_just_pressed("hold") and can_hold:
+		can_hold = false
+		EventBus.hold_piece.emit(current_piece)
+		clear_piece()
+		
+		if held_piece.is_empty():
+			held_piece = current_piece
+			spawn_piece()
+		else:
+			var p := current_piece
+			spawn_piece(held_piece)
+			held_piece = p
+
 	
 	if colliding and letting_piece_go_timer.is_stopped():
 		letting_piece_go_timer.start()
@@ -111,11 +128,13 @@ func check_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 	return is_colliding
 
 
-func spawn_piece() -> void:
-	if len(current_bag) <= 7:
-		current_bag.append_array(new_bag())
-	
-	current_piece = Blocks.blocks[current_bag.pop_back()]
+func spawn_piece(new_piece: Dictionary = {}) -> void:
+	if new_piece.is_empty():
+		if len(current_bag) <= 7:
+			current_bag.append_array(new_bag())
+		current_piece = Blocks.blocks[current_bag.pop_back()]
+	else:
+		current_piece = new_piece
 	current_coords = Vector2i(4, 1)
 	current_rotation = 0
 	
@@ -168,6 +187,7 @@ func clear_piece() -> void:
 
 func next_piece() -> void:
 	colliding = false
+	can_hold = true
 	clear_piece()
 	draw_piece(1)
 	clear_lines()

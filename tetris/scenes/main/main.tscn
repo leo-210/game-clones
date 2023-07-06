@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://lcimxralgonk" path="res://scenes/game/game.tscn" id="1_jtafv"]
 [ext_resource type="FontFile" uid="uid://du4cqkpu37bde" path="res://assets/fonts/dogicapixel.ttf" id="2_ffibw"]
-[ext_resource type="Texture2D" uid="uid://boppypmj1hhug" path="res://assets/img/hold.png" id="3_6pqft"]
+[ext_resource type="PackedScene" uid="uid://dno7jpflqoprg" path="res://scenes/hold/hold.tscn" id="3_xwt5q"]
 [ext_resource type="Texture2D" uid="uid://cin1c8mjpifqf" path="res://assets/img/next.png" id="4_88741"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_61yj5"]
@@ -68,11 +68,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="Hold" type="Node2D" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control"]
-
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control/Hold"]
-texture = ExtResource("3_6pqft")
-centered = false
+[node name="Hold" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control" instance=ExtResource("3_xwt5q")]
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 240)
