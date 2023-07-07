@@ -16,7 +16,7 @@ It can be played on Android, Windows and Linux.
 - **Spacebar** : hold piece
 
 *You do not need to change your keyboard layout in case you're not in QWERTY. For example, if you have the 
-french layout AZERTY, instead of pressing the Z key, you should press the Z key.*
+french layout AZERTY, instead of pressing the Z key, you should press the W key.*
 
 
 ## Game assets
