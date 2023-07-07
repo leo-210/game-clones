@@ -2,12 +2,14 @@ extends Node2D
 
 
 @onready var grid: TileMap = $Grid
-@onready var gravity_timer: Timer = $GravityTimer
-@onready var soft_drop_timer: Timer = $SoftDropTimer
-@onready var letting_piece_go_timer: Timer = $LettingPieceGoTimer
+@onready var lock_delay: Timer = $LockDelay
+@onready var lock_controls: Timer = $LockControls
 
-const TOP_LINE_Y := 4
+const TOP_LINE_Y := 2
 const LINE_LENGTH := 10
+
+const LINES_PER_LEVEL := 10
+const SOFT_DROP_SPEED := 1
 
 var current_bag: Array[int]
 var current_coords: Vector2i # The coords are at top left corner of the piece
@@ -15,12 +17,25 @@ var current_piece: Dictionary
 var current_rotation: int
 var held_piece: Dictionary = {}
 
+var level := 1.0
+var score := 0
+var speed: float
+var lines_left: int
+var combo := -1
+var last_clear_difficult := false
+
 var soft_dropping := false
 var colliding := false
 var can_hold := true
 
+var controls_locked := false
+
+var timer := 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	lines_left = LINES_PER_LEVEL * level
+	speed = pow(0.8 - ((level-1) * 0.007), level-1)
 	spawn_piece()
 
 
@@ -40,17 +55,15 @@ func _process(_delta: float) -> void:
 	# Soft drop
 	if Input.is_action_just_pressed("soft_drop"):
 		if colliding:
-			letting_piece_go_timer.stop()
+			lock_delay.stop()
 			_on_letting_piece_go_timer_timeout()
 		else:
 			soft_dropping = true
-			soft_drop_timer.start()
 	if Input.is_action_just_released("soft_drop"):
 		soft_dropping = false
-		soft_drop_timer.stop()
 	
 	# Hard drop
-	if Input.is_action_just_pressed("hard_drop"):
+	if Input.is_action_just_pressed("hard_drop") and !controls_locked:
 		hard_drop()
 	
 	# Hold
@@ -68,8 +81,20 @@ func _process(_delta: float) -> void:
 			held_piece = p
 
 	
-	if colliding and letting_piece_go_timer.is_stopped():
-		letting_piece_go_timer.start()
+	if colliding and lock_delay.is_stopped():
+		lock_delay.start()
+
+func _physics_process(_delta: float) -> void:
+	if soft_dropping:
+		timer += SOFT_DROP_SPEED
+	else:
+		timer += 1 / (60 * speed)
+
+	while timer >= 1:
+		timer -= 1
+		colliding = move_piece(Vector2i.DOWN)
+		if soft_dropping:
+			score_up(1)
 
 
 func move_piece(move: Vector2i) -> bool:
@@ -131,7 +156,9 @@ func check_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 func spawn_piece(new_piece: Dictionary = {}) -> void:
 	if new_piece.is_empty():
 		if len(current_bag) <= 7:
-			current_bag.append_array(new_bag())
+			var bag := new_bag()
+			bag.append_array(current_bag)
+			current_bag = bag
 		current_piece = Blocks.blocks[current_bag.pop_back()]
 	else:
 		current_piece = new_piece
@@ -184,10 +211,13 @@ func clear_piece() -> void:
 				grid.set_cell(3, current_coords + Vector2i.DOWN * k + Vector2i(i % 4, i / 4))
 
 
-
 func next_piece() -> void:
 	colliding = false
 	can_hold = true
+	
+	controls_locked = true
+	lock_controls.start()
+	
 	clear_piece()
 	draw_piece(1)
 	clear_lines()
@@ -231,7 +261,52 @@ func clear_lines() -> void:
 						1, 
 						cell
 				)
+	
+	var back_to_back := false
+	
+	match len(removed_lines):
+		1:
+			score_up(100 * level)
+		2:
+			score_up(300 * level)
+		3:
+			score_up(500 * level)
+		4:
+			if last_clear_difficult:
+				score_up(800 * level * 1.5)
+				back_to_back = true
+			else:
+				score_up(800 * level)
+			last_clear_difficult = true
+			EventBus.tetris.emit(back_to_back)
+	
+	if len(removed_lines) == 0:
+		combo = -1
+	if len(removed_lines) > 0:
+		combo += 1
+		if combo >= 1:
+			EventBus.combo.emit(combo)
+			score_up(50 * combo * level)
+	
+	if len(removed_lines) < 4:
+		last_clear_difficult = false
+	
+	lines_left -= len(removed_lines)
+	if lines_left <= 0:
+		level_up()
+	
+	EventBus.line_clear.emit(lines_left)
 
+func level_up() -> void:
+	level += 1
+	lines_left += LINES_PER_LEVEL
+	if level < 20:
+		speed = pow(0.8 - ((level-1) * 0.007), level-1)  # Tetris Worlds formula
+	EventBus.level_up.emit(level)
+
+func score_up(score_increment: int) -> void:
+	score += score_increment
+	EventBus.score_up.emit(score)
 
 func hard_drop() -> void:
 	var k := 1
@@ -242,7 +317,8 @@ func hard_drop() -> void:
 	clear_piece()
 	current_coords += Vector2i.DOWN * k
 	next_piece()
-		
+	
+	score_up(2 * k)
 
 
 func new_bag() -> Array[int]:
@@ -252,16 +328,11 @@ func new_bag() -> Array[int]:
 	return bag
 
 
-func _on_gravity_timeout() -> void:
-	if !soft_dropping:
-		colliding = move_piece(Vector2i.DOWN)
-
-
-func _on_soft_drop_timeout() -> void:
-	colliding = move_piece(Vector2i.DOWN)
-
-
 func _on_letting_piece_go_timer_timeout() -> void:
 	# If still colliding
 	if check_collisions(current_coords + Vector2i.DOWN, current_rotation):
 		next_piece()
+
+
+func _on_lock_controls_timeout() -> void:
+	controls_locked = false

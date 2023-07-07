@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tetris Clone"
 run/main_scene="res://scenes/main/main.tscn"
-config/features=PackedStringArray("4.0", "GL Compatibility")
+config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
 [autoload]
@@ -23,9 +23,11 @@ EventBus="*res://scripts/event_bus.gd"
 [display]
 
 window/size/viewport_width=288
-window/size/viewport_height=464
-window/size/window_width_override=432
-window/size/window_height_override=696
+window/size/viewport_height=496
+window/size/initial_position_type=0
+window/size/initial_position=Vector2i(50, 50)
+window/size/window_width_override=403
+window/size/window_height_override=694
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1

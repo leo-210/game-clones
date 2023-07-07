@@ -1,11 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://di0ovl1qp35yp"]
+[gd_scene load_steps=14 format=3 uid="uid://di0ovl1qp35yp"]
 
 [ext_resource type="PackedScene" uid="uid://lcimxralgonk" path="res://scenes/game/game.tscn" id="1_jtafv"]
 [ext_resource type="FontFile" uid="uid://du4cqkpu37bde" path="res://assets/fonts/dogicapixel.ttf" id="2_ffibw"]
+[ext_resource type="Script" path="res://scenes/main/score_label.gd" id="2_r85be"]
+[ext_resource type="Script" path="res://scenes/main/LevelLabel.gd" id="2_x5q2n"]
+[ext_resource type="Script" path="res://scenes/main/middle_text.gd" id="3_vvs88"]
 [ext_resource type="PackedScene" uid="uid://dno7jpflqoprg" path="res://scenes/hold/hold.tscn" id="3_xwt5q"]
 [ext_resource type="Texture2D" uid="uid://cin1c8mjpifqf" path="res://assets/img/next.png" id="4_88741"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_61yj5"]
+font = ExtResource("2_ffibw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v726j"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0862745, 0.113725, 0.156863, 0.713726)
+
+[sub_resource type="LabelSettings" id="LabelSettings_otywe"]
+font = ExtResource("2_ffibw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ambfn"]
+font = ExtResource("2_ffibw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_yq5yp"]
+font = ExtResource("2_ffibw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_tn6wg"]
 font = ExtResource("2_ffibw")
 font_size = 8
 
@@ -17,75 +37,152 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceHolder" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level 1 : 
+10 lines left"
+label_settings = SubResource("LabelSettings_61yj5")
+script = ExtResource("2_x5q2n")
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Score :
+0"
+label_settings = SubResource("LabelSettings_61yj5")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("2_r85be")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(192, 368)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="Game" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control" instance=ExtResource("1_jtafv")]
+
+[node name="MiddleText" type="CenterContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control"]
+z_index = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_vvs88")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PlaceHolder" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LevelUp" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(192, 400)
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/LevelUp"]
 layout_mode = 2
-size_flags_stretch_ratio = 3.0
-
-[node name="Game" parent="MarginContainer/VBoxContainer/HBoxContainer/Control" instance=ExtResource("1_jtafv")]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 14
-theme_override_constants/margin_bottom = 12
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-text = "Score :
-019850"
-label_settings = SubResource("LabelSettings_61yj5")
-horizontal_alignment = 2
+text = "Level up"
+label_settings = SubResource("LabelSettings_otywe")
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Combo" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Combo"]
+layout_mode = 2
+text = "x1 Combo"
+label_settings = SubResource("LabelSettings_ambfn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tetris" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Tetris" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris/VBoxContainer"]
+layout_mode = 2
+text = "Tetris"
+label_settings = SubResource("LabelSettings_yq5yp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToBack" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris/VBoxContainer"]
+layout_mode = 2
+text = "+ Back to back"
+label_settings = SubResource("LabelSettings_tn6wg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="Hold" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control" instance=ExtResource("3_xwt5q")]
+[node name="Hold" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control" instance=ExtResource("3_xwt5q")]
 
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 240)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="Next" type="Node2D" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2"]
+[node name="Next" type="Node2D" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2"]
 
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2/Next"]
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2/Next"]
 texture = ExtResource("4_88741")
 centered = false
 
-[node name="PlaceHolder2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ButtonPanel" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="PlaceHolder2" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
-
-[node name="ButtonPanel" type="Control" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
