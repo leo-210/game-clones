@@ -117,6 +117,19 @@ label_settings = SubResource("LabelSettings_otywe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PerfectClear" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/PerfectClear"]
+layout_mode = 2
+text = "All Clear"
+label_settings = SubResource("LabelSettings_otywe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Combo" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(160, 0)

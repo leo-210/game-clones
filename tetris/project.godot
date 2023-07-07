@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Blocks="*res://scripts/blocks.gd"
 EventBus="*res://scripts/event_bus.gd"
+RotationOffsets="*res://scripts/rotation_offsets.gd"
 
 [display]
 

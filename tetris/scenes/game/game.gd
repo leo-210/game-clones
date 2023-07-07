@@ -113,20 +113,30 @@ func move_piece(move: Vector2i) -> bool:
 func rotate_piece(rotation_: int) -> bool:
 	var next_rotation := (current_rotation + rotation_) % 4
 	var next_coords := Vector2i.ZERO
-	var can_rotate: bool = true
+	var can_rotate: bool = false
 	
-	if check_collisions(current_coords, next_rotation):
-		if !check_collisions(current_coords + Vector2i.LEFT, next_rotation):
-			next_coords = Vector2i.LEFT
-		elif !check_collisions(current_coords + Vector2i.RIGHT, next_rotation):
-			next_coords = Vector2i.RIGHT
-		# Try to move twice to the side
-		elif !check_collisions(current_coords + Vector2i.LEFT * 2, next_rotation):
-			next_coords = Vector2i.LEFT * 2
-		elif !check_collisions(current_coords + Vector2i.RIGHT * 2, next_rotation):
-			next_coords = Vector2i.RIGHT * 2
-		else: 
-			can_rotate = false
+	match current_piece:
+		Blocks.blocks[Blocks.NAMES.I]:
+			for i in range(len(RotationOffsets.i_offsets[0])):
+				var offset: Vector2i = (RotationOffsets.i_offsets[current_rotation][i] -
+						RotationOffsets.i_offsets[next_rotation][i])
+				if !check_collisions(current_coords + offset, next_rotation):
+					print(i)
+					can_rotate = true
+					next_coords = offset
+					break
+		Blocks.blocks[Blocks.NAMES.O]:
+			if !check_collisions(current_coords, next_rotation):
+				can_rotate = true
+		_:
+			for i in range(len(RotationOffsets.offsets[0])):
+				var offset: Vector2i = (RotationOffsets.offsets[current_rotation][i] -
+						RotationOffsets.offsets[next_rotation][i])
+				if !check_collisions(current_coords + offset, next_rotation):
+					print(i)
+					can_rotate = true
+					next_coords = offset
+					break
 	
 	if can_rotate:
 		clear_piece()
@@ -164,6 +174,10 @@ func spawn_piece(new_piece: Dictionary = {}) -> void:
 		current_piece = new_piece
 	current_coords = Vector2i(4, 1)
 	current_rotation = 0
+	
+	if check_collisions(current_coords, current_rotation):
+		EventBus.game_over.emit()
+		return
 	
 	draw_piece()
 
@@ -263,20 +277,41 @@ func clear_lines() -> void:
 				)
 	
 	var back_to_back := false
+	var perfect_clear := false
+	
+	if grid.get_used_cells(1).is_empty():
+		perfect_clear = true
+		EventBus.perfect_clear.emit()
 	
 	match len(removed_lines):
 		1:
-			score_up(100 * level)
+			if perfect_clear:
+				print("ok")
+				score_up(800 * level)
+			else:
+				score_up(100 * level)
 		2:
-			score_up(300 * level)
+			if perfect_clear:
+				score_up(1200 * level)
+			else:
+				score_up(300 * level)
 		3:
-			score_up(500 * level)
+			if perfect_clear:
+				score_up(1800 * level)
+			else:
+				score_up(500 * level)
 		4:
 			if last_clear_difficult:
-				score_up(800 * level * 1.5)
+				if perfect_clear:
+					score_up(3200 * level)
+				else:
+					score_up(800 * level * 1.5)
 				back_to_back = true
 			else:
-				score_up(800 * level)
+				if perfect_clear:
+					score_up(2000 * level)
+				else:
+					score_up(800 * level)
 			last_clear_difficult = true
 			EventBus.tetris.emit(back_to_back)
 	
