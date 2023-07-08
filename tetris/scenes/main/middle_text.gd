@@ -8,11 +8,14 @@ extends CenterContainer
 @onready var back_to_back: Label = $VBoxContainer/Tetris/VBoxContainer/BackToBack
 @onready var perfect_clear: PanelContainer = $VBoxContainer/PerfectClear
 @onready var v_box_container: VBoxContainer = $VBoxContainer
+@onready var game_over: PanelContainer = $VBoxContainer/GameOver
+@onready var game_over_score: Label = $VBoxContainer/GameOver/VBoxContainer/Score
 
 @onready var tetris_tween: Tween
 @onready var level_up_tween: Tween
 @onready var combo_tween: Tween
 @onready var perfect_clear_tween: Tween
+@onready var game_over_tween: Tween
 
 
 func _ready() -> void:
@@ -22,6 +25,7 @@ func _ready() -> void:
 	EventBus.combo.connect(_on_combo)
 	EventBus.tetris.connect(_on_tetris)
 	EventBus.perfect_clear.connect(_on_perfect_clear)
+	EventBus.game_over.connect(_on_game_over)
 
 
 func _on_tetris(back_to_back_: bool) -> void:
@@ -88,3 +92,20 @@ func _on_perfect_clear() -> void:
 	perfect_clear_tween.tween_property(perfect_clear, "modulate", Color.WHITE, 0.5)
 	perfect_clear_tween.tween_property(perfect_clear, "modulate", Color.TRANSPARENT, 0.5)
 	perfect_clear_tween.tween_callback(func () -> void: perfect_clear.hide())
+
+
+func _on_game_over(score: int) -> void:
+	perfect_clear.hide()
+	tetris.hide()
+	combo.hide()
+	level_up.hide()
+	
+	game_over.modulate.a = 0
+	game_over_score.text = "Score : " + str(score)
+	game_over.show()
+	
+	if game_over_tween:
+		game_over_tween.kill()
+	game_over_tween = create_tween()
+	
+	game_over_tween.tween_property(game_over, "modulate", Color.WHITE, 1)

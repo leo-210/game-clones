@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://di0ovl1qp35yp"]
+[gd_scene load_steps=24 format=3 uid="uid://di0ovl1qp35yp"]
 
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7dai0"]
 [ext_resource type="PackedScene" uid="uid://lcimxralgonk" path="res://scenes/game/game.tscn" id="1_jtafv"]
 [ext_resource type="FontFile" uid="uid://du4cqkpu37bde" path="res://assets/fonts/dogicapixel.ttf" id="2_ffibw"]
 [ext_resource type="Script" path="res://scenes/main/score_label.gd" id="2_r85be"]
 [ext_resource type="Script" path="res://scenes/main/LevelLabel.gd" id="2_x5q2n"]
 [ext_resource type="Script" path="res://scenes/main/middle_text.gd" id="3_vvs88"]
 [ext_resource type="PackedScene" uid="uid://dno7jpflqoprg" path="res://scenes/hold/hold.tscn" id="3_xwt5q"]
-[ext_resource type="Texture2D" uid="uid://cin1c8mjpifqf" path="res://assets/img/next.png" id="4_88741"]
+[ext_resource type="Texture2D" uid="uid://dabu3jbpmxi8h" path="res://assets/img/buttons.png" id="6_72w7f"]
+[ext_resource type="PackedScene" uid="uid://cerc1a0ta6uor" path="res://scenes/preview/preview.tscn" id="7_lrvt6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_61yj5"]
 font = ExtResource("2_ffibw")
@@ -29,6 +31,57 @@ font = ExtResource("2_ffibw")
 font = ExtResource("2_ffibw")
 font_size = 8
 
+[sub_resource type="LabelSettings" id="LabelSettings_0mbjm"]
+font = ExtResource("2_ffibw")
+font_size = 8
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_175kb"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gto1f"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_175kb")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh24s"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(192, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mbj05"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_wh24s")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r648a"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(48, 160, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gwbjp"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_r648a")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgwqg"]
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -36,6 +89,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7dai0")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -48,6 +102,8 @@ grow_vertical = 2
 
 [node name="PlaceHolder" type="Control" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -167,6 +223,45 @@ label_settings = SubResource("LabelSettings_tn6wg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GameOver" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_yq5yp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
+layout_mode = 2
+text = "Score :"
+label_settings = SubResource("LabelSettings_0mbjm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ffibw")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_gto1f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mbj05")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gwbjp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mgwqg")
+text = "Retry"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -185,11 +280,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="Next" type="Node2D" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2"]
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2/Next"]
-texture = ExtResource("4_88741")
-centered = false
+[node name="Preview" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2" instance=ExtResource("7_lrvt6")]
 
 [node name="ButtonPanel" type="Control" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
@@ -199,3 +290,5 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]

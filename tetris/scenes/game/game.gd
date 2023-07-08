@@ -29,11 +29,15 @@ var colliding := false
 var can_hold := true
 
 var controls_locked := false
+var game_over := false
 
 var timer := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	EventBus.preview_ready.connect(_on_preview_ready)
+	EventBus.game_over.connect(_on_game_over)
+	
 	lines_left = LINES_PER_LEVEL * level
 	speed = pow(0.8 - ((level-1) * 0.007), level-1)
 	spawn_piece()
@@ -98,6 +102,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func move_piece(move: Vector2i) -> bool:
+	if game_over:
+		return false
+	
 	var is_colliding := check_collisions(current_coords + move, current_rotation)
 	
 	if !is_colliding:
@@ -121,7 +128,6 @@ func rotate_piece(rotation_: int) -> bool:
 				var offset: Vector2i = (RotationOffsets.i_offsets[current_rotation][i] -
 						RotationOffsets.i_offsets[next_rotation][i])
 				if !check_collisions(current_coords + offset, next_rotation):
-					print(i)
 					can_rotate = true
 					next_coords = offset
 					break
@@ -133,7 +139,6 @@ func rotate_piece(rotation_: int) -> bool:
 				var offset: Vector2i = (RotationOffsets.offsets[current_rotation][i] -
 						RotationOffsets.offsets[next_rotation][i])
 				if !check_collisions(current_coords + offset, next_rotation):
-					print(i)
 					can_rotate = true
 					next_coords = offset
 					break
@@ -164,6 +169,9 @@ func check_collisions(next_coords: Vector2i, next_rotation: int) -> bool:
 
 
 func spawn_piece(new_piece: Dictionary = {}) -> void:
+	if game_over:
+		return
+	
 	if new_piece.is_empty():
 		if len(current_bag) <= 7:
 			var bag := new_bag()
@@ -176,10 +184,11 @@ func spawn_piece(new_piece: Dictionary = {}) -> void:
 	current_rotation = 0
 	
 	if check_collisions(current_coords, current_rotation):
-		EventBus.game_over.emit()
+		EventBus.game_over.emit(score)
 		return
 	
 	draw_piece()
+	EventBus.next_piece.emit(current_bag)
 
 func draw_piece(layer: int = 2) -> void:
 	for i in range(len(current_piece["rotations"][current_rotation])):
@@ -286,7 +295,6 @@ func clear_lines() -> void:
 	match len(removed_lines):
 		1:
 			if perfect_clear:
-				print("ok")
 				score_up(800 * level)
 			else:
 				score_up(100 * level)
@@ -356,6 +364,12 @@ func hard_drop() -> void:
 	score_up(2 * k)
 
 
+func _on_game_over(score: int) -> void:
+	controls_locked = true
+	game_over = true
+	lock_controls.stop()
+
+
 func new_bag() -> Array[int]:
 	var bag: Array[int] = [0, 1, 2, 3, 4, 5, 6]
 	bag.shuffle()
@@ -371,3 +385,7 @@ func _on_letting_piece_go_timer_timeout() -> void:
 
 func _on_lock_controls_timeout() -> void:
 	controls_locked = false
+
+
+func _on_preview_ready() -> void:
+	EventBus.next_piece.emit(current_bag)
