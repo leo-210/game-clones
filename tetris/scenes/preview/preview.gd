@@ -8,10 +8,6 @@ const PREVIEW_LENGTH := 4  # How many pieces on preview
 
 func _ready() -> void:
 	EventBus.next_piece.connect(_on_next_piece)
-	# Because the Game scenes loads before the Preview scene, the first signal
-	# next_piece emitted is too soon. So we send a signal so that the Game scene
-	# sends one again.
-	EventBus.preview_ready.emit()
 
 
 func _on_next_piece(bag: Array[int]) -> void:

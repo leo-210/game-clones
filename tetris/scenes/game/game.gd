@@ -30,20 +30,20 @@ var can_hold := true
 
 var controls_locked := false
 var game_over := false
+var game_initialized := false
 
 var timer := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	EventBus.preview_ready.connect(_on_preview_ready)
 	EventBus.game_over.connect(_on_game_over)
-	
-	lines_left = LINES_PER_LEVEL * level
-	speed = pow(0.8 - ((level-1) * 0.007), level-1)
-	spawn_piece()
+	EventBus.init_game.connect(_on_game_init)
 
 
 func _process(_delta: float) -> void:
+	if !game_initialized:
+		return
+	
 	# Move to the sides
 	if Input.is_action_just_pressed("left"):
 		move_piece(Vector2i.LEFT)
@@ -89,6 +89,9 @@ func _process(_delta: float) -> void:
 		lock_delay.start()
 
 func _physics_process(_delta: float) -> void:
+	if !game_initialized:
+		return
+	
 	if soft_dropping:
 		timer += SOFT_DROP_SPEED
 	else:
@@ -370,6 +373,14 @@ func _on_game_over(score: int) -> void:
 	lock_controls.stop()
 
 
+func _on_game_init(level_: int) -> void:
+	level = level_
+	lines_left = LINES_PER_LEVEL * level
+	speed = pow(0.8 - ((level-1) * 0.007), level-1)
+	game_initialized = true
+	spawn_piece()
+
+
 func new_bag() -> Array[int]:
 	var bag: Array[int] = [0, 1, 2, 3, 4, 5, 6]
 	bag.shuffle()
@@ -385,7 +396,3 @@ func _on_letting_piece_go_timer_timeout() -> void:
 
 func _on_lock_controls_timeout() -> void:
 	controls_locked = false
-
-
-func _on_preview_ready() -> void:
-	EventBus.next_piece.emit(current_bag)

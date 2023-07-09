@@ -10,4 +10,5 @@ signal combo(current_combo: int)
 signal perfect_clear
 signal game_over(final_score: int)
 signal next_piece(bag: Array[int])
-signal preview_ready
+
+signal init_game(level: int)

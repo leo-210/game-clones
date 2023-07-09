@@ -8,6 +8,7 @@ var line_left := 0
 func _ready() -> void:
 	EventBus.line_clear.connect(_on_line_clear)
 	EventBus.level_up.connect(_on_level_up)
+	EventBus.init_game.connect(_on_level_up)
 
 
 func _on_line_clear(line_left_: int) -> void:
