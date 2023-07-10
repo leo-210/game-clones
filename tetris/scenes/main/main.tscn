@@ -279,7 +279,6 @@ grow_vertical = 2
 script = ExtResource("1_7dai0")
 
 [node name="GameContainer" type="CenterContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -305,15 +304,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Level 1 : 
-10 lines left"
+text = "Level 1 :"
 label_settings = SubResource("LabelSettings_61yj5")
 script = ExtResource("3_as0b5")
 
 [node name="ScoreLabel" type="Label" parent="GameContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Score :
-0"
+100000"
 label_settings = SubResource("LabelSettings_61yj5")
 horizontal_alignment = 2
 vertical_alignment = 1

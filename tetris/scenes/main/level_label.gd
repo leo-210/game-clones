@@ -15,7 +15,7 @@ func _ready() -> void:
 func _on_line_clear(line_left_: int) -> void:
 	line_left = line_left_
 	if training_mode:
-		text = "Level " + str(level) + " :\n" + str(line_left) + " lines cleared"
+		text = "Level " + str(level)
 	else:
 		text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
 
@@ -25,6 +25,6 @@ func _on_level_up(new_level: int, training_mode_: bool = false) -> void:
 	
 	level = new_level
 	if training_mode:
-		text = "Level " + str(level) + " :\n" + str(line_left) + " lines cleared"
+		text = "Level "
 	else:
 		text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
