@@ -46,43 +46,29 @@ func _process(_delta: float) -> void:
 	
 	# Move to the sides
 	if Input.is_action_just_pressed("left"):
-		move_piece(Vector2i.LEFT)
+		_on_move_left_button_pressed()
 	if Input.is_action_just_pressed("right"):
-		move_piece(Vector2i.RIGHT)
+		_on_move_right_button_pressed()
 	
 	# Rotation
 	if Input.is_action_just_pressed("turn_left"):
-		colliding = rotate_piece(-1)
+		_on_rotate_left_button_pressed()
 	if Input.is_action_just_pressed("turn_right"):
-		colliding = rotate_piece(1)
+		_on_rotate_right_button_pressed()
 	
 	# Soft drop
 	if Input.is_action_just_pressed("soft_drop"):
-		if colliding:
-			lock_delay.stop()
-			_on_letting_piece_go_timer_timeout()
-		else:
-			soft_dropping = true
+		_on_soft_drop_button_button_down()
 	if Input.is_action_just_released("soft_drop"):
-		soft_dropping = false
+		_on_soft_drop_button_button_up()
 	
 	# Hard drop
-	if Input.is_action_just_pressed("hard_drop") and !controls_locked:
+	if Input.is_action_just_pressed("hard_drop"):
 		hard_drop()
 	
 	# Hold
-	if Input.is_action_just_pressed("hold") and can_hold:
-		can_hold = false
-		EventBus.hold_piece.emit(current_piece)
-		clear_piece()
-		
-		if held_piece.is_empty():
-			held_piece = current_piece
-			spawn_piece()
-		else:
-			var p := current_piece
-			spawn_piece(held_piece)
-			held_piece = p
+	if Input.is_action_just_pressed("hold"):
+		_on_hold_button_pressed()
 
 	
 	if colliding and lock_delay.is_stopped():
@@ -355,6 +341,9 @@ func score_up(score_increment: int) -> void:
 	EventBus.score_up.emit(score)
 
 func hard_drop() -> void:
+	if controls_locked:
+		return
+	
 	var k := 1
 	while !check_collisions(current_coords + Vector2i.DOWN * k, current_rotation):
 		k += 1
@@ -396,3 +385,51 @@ func _on_letting_piece_go_timer_timeout() -> void:
 
 func _on_lock_controls_timeout() -> void:
 	controls_locked = false
+
+
+func _on_rotate_left_button_pressed() -> void:
+	colliding = rotate_piece(-1)
+
+
+func _on_hard_drop_button_pressed() -> void:
+	hard_drop()
+
+
+func _on_rotate_right_button_pressed() -> void:
+	colliding = rotate_piece(1)
+
+
+func _on_move_left_button_pressed() -> void:
+	move_piece(Vector2i.LEFT)
+
+
+func _on_move_right_button_pressed() -> void:
+	move_piece(Vector2i.RIGHT)
+
+
+func _on_hold_button_pressed() -> void:
+	if !can_hold: 
+		return
+	can_hold = false
+	EventBus.hold_piece.emit(current_piece)
+	clear_piece()
+	
+	if held_piece.is_empty():
+		held_piece = current_piece
+		spawn_piece()
+	else:
+		var p := current_piece
+		spawn_piece(held_piece)
+		held_piece = p
+
+
+func _on_soft_drop_button_button_down() -> void:
+	if colliding:
+		lock_delay.stop()
+		_on_letting_piece_go_timer_timeout()
+	else:
+		soft_dropping = true
+
+
+func _on_soft_drop_button_button_up() -> void:
+	soft_dropping = false

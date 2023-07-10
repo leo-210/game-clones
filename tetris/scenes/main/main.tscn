@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://di0ovl1qp35yp"]
+[gd_scene load_steps=61 format=3 uid="uid://di0ovl1qp35yp"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7dai0"]
 [ext_resource type="PackedScene" uid="uid://lcimxralgonk" path="res://scenes/game/game.tscn" id="1_jtafv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dno7jpflqoprg" path="res://scenes/hold/hold.tscn" id="3_xwt5q"]
 [ext_resource type="Texture2D" uid="uid://dabu3jbpmxi8h" path="res://assets/img/buttons.png" id="6_72w7f"]
 [ext_resource type="PackedScene" uid="uid://cerc1a0ta6uor" path="res://scenes/preview/preview.tscn" id="7_lrvt6"]
+[ext_resource type="Texture2D" uid="uid://bavk0v4wjw1b3" path="res://assets/img/checkbox.png" id="10_ktmyo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_61yj5"]
 font = ExtResource("2_ffibw")
@@ -82,6 +83,90 @@ texture_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgwqg"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qvl3"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xja6s"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(0, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsocp"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u6je"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(48, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1o2i"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(48, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x307s"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(192, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hveia"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5kci"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(96, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nwri"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6fqe"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(0, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhcai"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(0, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12cux"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(144, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxr4c"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kf0q"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(48, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o725"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4s3v"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(96, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phjsx"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(96, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20050"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(240, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbj7t"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(0, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgp2y"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(0, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro7es"]
+atlas = ExtResource("6_72w7f")
+region = Rect2(144, 64, 48, 32)
+
 [sub_resource type="LabelSettings" id="LabelSettings_mdpda"]
 font = ExtResource("2_ffibw")
 
@@ -102,7 +187,7 @@ texture_margin_top = 3.0
 texture_margin_right = 3.0
 texture_margin_bottom = 3.0
 
-[sub_resource type="Image" id="Image_6imrt"]
+[sub_resource type="Image" id="Image_iffjh"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 76, 255, 255, 255, 75, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 99, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 99, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 4, 255, 255, 255, 122, 255, 255, 255, 191, 255, 255, 255, 188, 255, 255, 255, 188, 255, 255, 255, 191, 255, 255, 255, 121, 255, 255, 255, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 142, 255, 255, 255, 191, 255, 255, 255, 181, 255, 255, 255, 53, 255, 255, 255, 54, 255, 255, 255, 181, 255, 255, 255, 191, 255, 255, 255, 142, 255, 255, 255, 12, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 71, 255, 255, 255, 191, 255, 255, 255, 171, 255, 255, 255, 36, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 36, 255, 255, 255, 171, 255, 255, 255, 191, 255, 255, 255, 71, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 86, 255, 255, 255, 22, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 22, 255, 255, 255, 86, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 86, 255, 255, 255, 22, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 22, 255, 255, 255, 86, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 71, 255, 255, 255, 191, 255, 255, 255, 171, 255, 255, 255, 36, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 36, 255, 255, 255, 171, 255, 255, 255, 191, 255, 255, 255, 71, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 142, 255, 255, 255, 191, 255, 255, 255, 181, 255, 255, 255, 54, 255, 255, 255, 54, 255, 255, 255, 182, 255, 255, 255, 191, 255, 255, 255, 142, 255, 255, 255, 12, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 4, 255, 255, 255, 121, 255, 255, 255, 191, 255, 255, 255, 188, 255, 255, 255, 188, 255, 255, 255, 191, 255, 255, 255, 121, 255, 255, 255, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 98, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 98, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 75, 255, 255, 255, 75, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -112,7 +197,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ntv6k"]
-image = SubResource("Image_6imrt")
+image = SubResource("Image_iffjh")
 
 [sub_resource type="Theme" id="Theme_boy8s"]
 default_font = ExtResource("2_ffibw")
@@ -120,6 +205,14 @@ default_font_size = 16
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_rbwt1")
 LineEdit/styles/normal = SubResource("StyleBoxTexture_0dbk6")
 SpinBox/icons/updown = SubResource("ImageTexture_ntv6k")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0afnq"]
+atlas = ExtResource("10_ktmyo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vyqn"]
+atlas = ExtResource("10_ktmyo")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wreho"]
 content_margin_left = 10.0
@@ -156,6 +249,13 @@ texture_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2eoy"]
 
+[sub_resource type="InputEventKey" id="InputEventKey_s3fml"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_vlcq2"]
+events = [SubResource("InputEventKey_s3fml")]
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -165,35 +265,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7dai0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="GameContainer" type="CenterContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlaceHolder" type="Control" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GameContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 24
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="LevelLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+[node name="LevelLabel" type="Label" parent="GameContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Level 1 : 
@@ -201,7 +296,7 @@ text = "Level 1 :
 label_settings = SubResource("LabelSettings_61yj5")
 script = ExtResource("2_x5q2n")
 
-[node name="ScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+[node name="ScoreLabel" type="Label" parent="GameContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Score :
 0"
@@ -210,18 +305,18 @@ horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("2_r85be")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="GameContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(192, 368)
 layout_mode = 2
 size_flags_stretch_ratio = 3.0
 
-[node name="Game" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control" instance=ExtResource("1_jtafv")]
+[node name="Game" parent="GameContainer/VBoxContainer/HBoxContainer/Control" instance=ExtResource("1_jtafv")]
 
-[node name="MiddleText" type="CenterContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control"]
+[node name="MiddleText" type="CenterContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control"]
 z_index = 3
 layout_mode = 1
 anchors_preset = 15
@@ -231,102 +326,102 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_vvs88")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="LevelUp" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+[node name="LevelUp" type="PanelContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/LevelUp"]
+[node name="Label" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/LevelUp"]
 layout_mode = 2
 text = "Level up"
 label_settings = SubResource("LabelSettings_otywe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PerfectClear" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+[node name="PerfectClear" type="PanelContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/PerfectClear"]
+[node name="Label" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/PerfectClear"]
 layout_mode = 2
 text = "All Clear"
 label_settings = SubResource("LabelSettings_otywe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Combo" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+[node name="Combo" type="PanelContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Combo"]
+[node name="Label" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Combo"]
 layout_mode = 2
 text = "x1 Combo"
 label_settings = SubResource("LabelSettings_ambfn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tetris" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+[node name="Tetris" type="PanelContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Tetris" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris/VBoxContainer"]
+[node name="Tetris" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris/VBoxContainer"]
 layout_mode = 2
 text = "Tetris"
 label_settings = SubResource("LabelSettings_yq5yp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackToBack" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris/VBoxContainer"]
+[node name="BackToBack" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/Tetris/VBoxContainer"]
 layout_mode = 2
 text = "+ Back to back"
 label_settings = SubResource("LabelSettings_tn6wg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOver" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
+[node name="GameOver" type="PanelContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v726j")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
+[node name="Label" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_yq5yp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
+[node name="Score" type="Label" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
 layout_mode = 2
 text = "Score :"
 label_settings = SubResource("LabelSettings_0mbjm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer"]
+[node name="Button" type="Button" parent="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_ffibw")
@@ -337,36 +432,89 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_gwbjp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mgwqg")
 text = "Retry"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="GameContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="Hold" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control" instance=ExtResource("3_xwt5q")]
+[node name="Hold" parent="GameContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control" instance=ExtResource("3_xwt5q")]
 
-[node name="Control2" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="GameContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 240)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="Preview" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2" instance=ExtResource("7_lrvt6")]
+[node name="Preview" parent="GameContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control2" instance=ExtResource("7_lrvt6")]
 
-[node name="ButtonPanel" type="Control" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
+[node name="ButtonPanel" type="MarginContainer" parent="GameContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
 
-[node name="PlaceHolder2" type="Control" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameContainer/VBoxContainer/ButtonPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="GridContainer" type="GridContainer" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 8
+columns = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="RotateLeftButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_7qvl3")
+texture_pressed = SubResource("AtlasTexture_xja6s")
+texture_hover = SubResource("AtlasTexture_jsocp")
+
+[node name="HardDropButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_1u6je")
+texture_pressed = SubResource("AtlasTexture_n1o2i")
+texture_hover = SubResource("AtlasTexture_x307s")
+
+[node name="RotateRightButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_hveia")
+texture_pressed = SubResource("AtlasTexture_y5kci")
+texture_hover = SubResource("AtlasTexture_3nwri")
+
+[node name="MoveLeftButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_p6fqe")
+texture_pressed = SubResource("AtlasTexture_uhcai")
+texture_hover = SubResource("AtlasTexture_12cux")
+
+[node name="SoftDropButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_cxr4c")
+texture_pressed = SubResource("AtlasTexture_0kf0q")
+texture_hover = SubResource("AtlasTexture_5o725")
+
+[node name="MoveRightButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_i4s3v")
+texture_pressed = SubResource("AtlasTexture_phjsx")
+texture_hover = SubResource("AtlasTexture_20050")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HoldButton" type="TextureButton" parent="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_tbj7t")
+texture_pressed = SubResource("AtlasTexture_pgp2y")
+texture_hover = SubResource("AtlasTexture_ro7es")
+
+[node name="LevelSelection" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -374,23 +522,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelection"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="LevelSelection/VBoxContainer"]
 layout_mode = 2
 text = "Starting Level :"
 label_settings = SubResource("LabelSettings_mdpda")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="LevelSelection/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="SpinBox" type="SpinBox" parent="CenterContainer/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelection/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SpinBox" type="SpinBox" parent="LevelSelection/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_boy8s")
 min_value = 1.0
@@ -399,11 +551,18 @@ value = 1.0
 alignment = 3
 select_all_on_focus = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="LevelSelection/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ffibw")
+theme_override_icons/checked = SubResource("AtlasTexture_0afnq")
+theme_override_icons/unchecked = SubResource("AtlasTexture_5vyqn")
+text = "Buttons"
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelSelection/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer/MarginContainer"]
+[node name="StartGame" type="Button" parent="LevelSelection/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ffibw")
 theme_override_font_sizes/font_size = 16
@@ -411,7 +570,16 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_wreho")
 theme_override_styles/hover = SubResource("StyleBoxTexture_mi5v0")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_t8e7g")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s2eoy")
+shortcut = SubResource("Shortcut_vlcq2")
 text = "Start"
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/MarginContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/RotateLeftButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_rotate_left_button_pressed"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/HardDropButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_hard_drop_button_pressed"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/RotateRightButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_rotate_right_button_pressed"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/MoveLeftButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_move_left_button_pressed"]
+[connection signal="button_down" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/SoftDropButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_soft_drop_button_button_down"]
+[connection signal="button_up" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/SoftDropButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_soft_drop_button_button_up"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/MoveRightButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_move_right_button_pressed"]
+[connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/CenterContainer/HoldButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_hold_button_pressed"]
+[connection signal="pressed" from="LevelSelection/VBoxContainer/MarginContainer/StartGame" to="." method="_on_start_game_pressed"]

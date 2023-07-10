@@ -24,11 +24,9 @@ RotationOffsets="*res://scripts/rotation_offsets.gd"
 [display]
 
 window/size/viewport_width=288
-window/size/viewport_height=496
-window/size/initial_position_type=0
-window/size/initial_position=Vector2i(50, 50)
-window/size/window_width_override=403
-window/size/window_height_override=694
+window/size/viewport_height=512
+window/size/window_width_override=374
+window/size/window_height_override=666
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
