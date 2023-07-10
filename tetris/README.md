@@ -4,6 +4,8 @@ This is a tetris clone made with [Godot Engine](https://godotengine.org/).
 
 It can be played on Android, Windows and Linux. 
 
+![Screenshot](https://github.com/leo-210/game-clones/assets/80011647/65ff65fa-98f4-431d-b9bd-eb4f9a0c31fd)
+
 ## Controls
 
 For now, you cannot change these controls.
@@ -11,6 +13,7 @@ For now, you cannot change these controls.
 ### Touchscreen
 
 Toggle the "Button controls" (toggled on by default on Android) before starting the game. Then just press the different buttons.
+
 
 *I might add support for swiping and different button layouts*
 
@@ -38,4 +41,4 @@ french layout AZERTY, instead of pressing the Z key, you should press the W key.
 
 ## Game assets
 
-I made all the assets, except [This font](https://www.dafont.com/fr/dogica.font) by Roberto Mocci. There is no sound or music.
+I made all the assets, except [this font](https://www.dafont.com/fr/dogica.font) by Roberto Mocci. There is no sound or music.
