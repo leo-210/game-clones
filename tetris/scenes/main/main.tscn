@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://di0ovl1qp35yp"]
+[gd_scene load_steps=64 format=3 uid="uid://di0ovl1qp35yp"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7dai0"]
 [ext_resource type="PackedScene" uid="uid://lcimxralgonk" path="res://scenes/game/game.tscn" id="1_jtafv"]
@@ -167,6 +167,12 @@ region = Rect2(0, 160, 48, 32)
 atlas = ExtResource("6_72w7f")
 region = Rect2(144, 64, 48, 32)
 
+[sub_resource type="LabelSettings" id="LabelSettings_yg7jq"]
+font = ExtResource("2_ffibw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_fg4hr"]
+font = ExtResource("2_ffibw")
+
 [sub_resource type="LabelSettings" id="LabelSettings_mdpda"]
 font = ExtResource("2_ffibw")
 
@@ -213,6 +219,8 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5vyqn"]
 atlas = ExtResource("10_ktmyo")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqm7g"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wreho"]
 content_margin_left = 10.0
@@ -514,7 +522,7 @@ texture_normal = SubResource("AtlasTexture_tbj7t")
 texture_pressed = SubResource("AtlasTexture_pgp2y")
 texture_hover = SubResource("AtlasTexture_ro7es")
 
-[node name="LevelSelection" type="CenterContainer" parent="."]
+[node name="StartScreen" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -522,27 +530,75 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartScreen"]
+layout_mode = 2
+
+[node name="HighscoresLabel" type="Label" parent="StartScreen/VBoxContainer"]
+layout_mode = 2
+text = "Top scores :"
+label_settings = SubResource("LabelSettings_yg7jq")
+
+[node name="MarginContainer" type="MarginContainer" parent="StartScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 32
+
+[node name="Highscores" type="VBoxContainer" parent="StartScreen/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Highscore1" type="Label" parent="StartScreen/VBoxContainer/MarginContainer/Highscores"]
+visible = false
+layout_mode = 2
+text = "10/7 - 650000"
+label_settings = SubResource("LabelSettings_fg4hr")
+
+[node name="Highscore2" type="Label" parent="StartScreen/VBoxContainer/MarginContainer/Highscores"]
+visible = false
+layout_mode = 2
+text = "10/7 - 650000"
+label_settings = SubResource("LabelSettings_fg4hr")
+
+[node name="Highscore3" type="Label" parent="StartScreen/VBoxContainer/MarginContainer/Highscores"]
+visible = false
+layout_mode = 2
+text = "10/7 - 650000"
+label_settings = SubResource("LabelSettings_fg4hr")
+
+[node name="Highscore4" type="Label" parent="StartScreen/VBoxContainer/MarginContainer/Highscores"]
+visible = false
+layout_mode = 2
+text = "10/7 - 650000"
+label_settings = SubResource("LabelSettings_fg4hr")
+
+[node name="Highscore5" type="Label" parent="StartScreen/VBoxContainer/MarginContainer/Highscores"]
+visible = false
+layout_mode = 2
+text = "10/7 - 650"
+label_settings = SubResource("LabelSettings_fg4hr")
+
+[node name="GameConfig" type="VBoxContainer" parent="StartScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="LevelSelection/VBoxContainer"]
+[node name="Label" type="Label" parent="StartScreen/VBoxContainer/GameConfig"]
 layout_mode = 2
 text = "Starting Level :"
 label_settings = SubResource("LabelSettings_mdpda")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="LevelSelection/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="StartScreen/VBoxContainer/GameConfig"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelection/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="SpinBox" type="SpinBox" parent="LevelSelection/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_boy8s")
 min_value = 1.0
@@ -551,18 +607,19 @@ value = 1.0
 alignment = 3
 select_all_on_focus = true
 
-[node name="CheckBox" type="CheckBox" parent="LevelSelection/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ffibw")
 theme_override_icons/checked = SubResource("AtlasTexture_0afnq")
 theme_override_icons/unchecked = SubResource("AtlasTexture_5vyqn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jqm7g")
 text = "Buttons"
 
-[node name="MarginContainer" type="MarginContainer" parent="LevelSelection/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="StartScreen/VBoxContainer/GameConfig"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="StartGame" type="Button" parent="LevelSelection/VBoxContainer/MarginContainer"]
+[node name="StartGame" type="Button" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ffibw")
 theme_override_font_sizes/font_size = 16
@@ -582,4 +639,4 @@ text = "Start"
 [connection signal="button_up" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/SoftDropButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_soft_drop_button_button_up"]
 [connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/MoveRightButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_move_right_button_pressed"]
 [connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/CenterContainer/HoldButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_hold_button_pressed"]
-[connection signal="pressed" from="LevelSelection/VBoxContainer/MarginContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="StartScreen/VBoxContainer/GameConfig/MarginContainer/StartGame" to="." method="_on_start_game_pressed"]
