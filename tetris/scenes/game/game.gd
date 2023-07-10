@@ -31,6 +31,7 @@ var can_hold := true
 var controls_locked := false
 var game_over := false
 var game_initialized := false
+var training_mode := false
 
 var timer := 0.0
 
@@ -323,13 +324,19 @@ func clear_lines() -> void:
 	if len(removed_lines) < 4:
 		last_clear_difficult = false
 	
-	lines_left -= len(removed_lines)
-	if lines_left <= 0:
-		level_up()
+	if training_mode:
+		lines_left += len(removed_lines)
+	else:
+		lines_left -= len(removed_lines)
+		if lines_left <= 0:
+			level_up()
 	
 	EventBus.line_clear.emit(lines_left)
 
 func level_up() -> void:
+	if training_mode:
+		return
+	
 	level += 1
 	lines_left += LINES_PER_LEVEL
 	if level < 20:
@@ -362,9 +369,13 @@ func _on_game_over(score: int) -> void:
 	lock_controls.stop()
 
 
-func _on_game_init(level_: int) -> void:
+func _on_game_init(level_: int, training_mode_: bool) -> void:
+	training_mode = training_mode_
+	if training_mode:
+		lines_left = 0
+	else:
+		lines_left = LINES_PER_LEVEL * level
 	level = level_
-	lines_left = LINES_PER_LEVEL * level
 	speed = pow(0.8 - ((level-1) * 0.007), level-1)
 	game_initialized = true
 	spawn_piece()

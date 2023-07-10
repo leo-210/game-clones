@@ -15,6 +15,6 @@ func _on_line_clear(line_left_: int) -> void:
 	line_left = line_left_
 	text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
 
-func _on_level_up(new_level: int) -> void:
+func _on_level_up(new_level: int, _training_mode: bool = false) -> void:
 	level = new_level
 	text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"

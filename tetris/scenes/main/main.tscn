@@ -1,10 +1,10 @@
-[gd_scene load_steps=64 format=3 uid="uid://di0ovl1qp35yp"]
+[gd_scene load_steps=65 format=3 uid="uid://di0ovl1qp35yp"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7dai0"]
 [ext_resource type="PackedScene" uid="uid://lcimxralgonk" path="res://scenes/game/game.tscn" id="1_jtafv"]
 [ext_resource type="FontFile" uid="uid://du4cqkpu37bde" path="res://assets/fonts/dogicapixel.ttf" id="2_ffibw"]
 [ext_resource type="Script" path="res://scenes/main/score_label.gd" id="2_r85be"]
-[ext_resource type="Script" path="res://scenes/main/LevelLabel.gd" id="2_x5q2n"]
+[ext_resource type="Script" path="res://scenes/main/level_label.gd" id="3_as0b5"]
 [ext_resource type="Script" path="res://scenes/main/middle_text.gd" id="3_vvs88"]
 [ext_resource type="PackedScene" uid="uid://dno7jpflqoprg" path="res://scenes/hold/hold.tscn" id="3_xwt5q"]
 [ext_resource type="Texture2D" uid="uid://dabu3jbpmxi8h" path="res://assets/img/buttons.png" id="6_72w7f"]
@@ -193,7 +193,7 @@ texture_margin_top = 3.0
 texture_margin_right = 3.0
 texture_margin_bottom = 3.0
 
-[sub_resource type="Image" id="Image_iffjh"]
+[sub_resource type="Image" id="Image_n6pry"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 76, 255, 255, 255, 75, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 99, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 99, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 4, 255, 255, 255, 122, 255, 255, 255, 191, 255, 255, 255, 188, 255, 255, 255, 188, 255, 255, 255, 191, 255, 255, 255, 121, 255, 255, 255, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 142, 255, 255, 255, 191, 255, 255, 255, 181, 255, 255, 255, 53, 255, 255, 255, 54, 255, 255, 255, 181, 255, 255, 255, 191, 255, 255, 255, 142, 255, 255, 255, 12, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 71, 255, 255, 255, 191, 255, 255, 255, 171, 255, 255, 255, 36, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 36, 255, 255, 255, 171, 255, 255, 255, 191, 255, 255, 255, 71, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 86, 255, 255, 255, 22, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 22, 255, 255, 255, 86, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 86, 255, 255, 255, 22, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 22, 255, 255, 255, 86, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 71, 255, 255, 255, 191, 255, 255, 255, 171, 255, 255, 255, 36, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 36, 255, 255, 255, 171, 255, 255, 255, 191, 255, 255, 255, 71, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 142, 255, 255, 255, 191, 255, 255, 255, 181, 255, 255, 255, 54, 255, 255, 255, 54, 255, 255, 255, 182, 255, 255, 255, 191, 255, 255, 255, 142, 255, 255, 255, 12, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 4, 255, 255, 255, 121, 255, 255, 255, 191, 255, 255, 255, 188, 255, 255, 255, 188, 255, 255, 255, 191, 255, 255, 255, 121, 255, 255, 255, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 98, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 98, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 75, 255, 255, 255, 75, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -203,7 +203,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ntv6k"]
-image = SubResource("Image_iffjh")
+image = SubResource("Image_n6pry")
 
 [sub_resource type="Theme" id="Theme_boy8s"]
 default_font = ExtResource("2_ffibw")
@@ -264,6 +264,11 @@ keycode = 4194309
 [sub_resource type="Shortcut" id="Shortcut_vlcq2"]
 events = [SubResource("InputEventKey_s3fml")]
 
+[sub_resource type="LabelSettings" id="LabelSettings_xounv"]
+font = ExtResource("2_ffibw")
+font_size = 8
+font_color = Color(0.741176, 0.741176, 0.741176, 0.694118)
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -299,10 +304,11 @@ layout_mode = 2
 [node name="LevelLabel" type="Label" parent="GameContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "Level 1 : 
 10 lines left"
 label_settings = SubResource("LabelSettings_61yj5")
-script = ExtResource("2_x5q2n")
+script = ExtResource("3_as0b5")
 
 [node name="ScoreLabel" type="Label" parent="GameContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
@@ -615,11 +621,22 @@ theme_override_icons/unchecked = SubResource("AtlasTexture_5vyqn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jqm7g")
 text = "Buttons"
 
+[node name="TrainingMode" type="CheckBox" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ffibw")
+theme_override_icons/checked = SubResource("AtlasTexture_0afnq")
+theme_override_icons/unchecked = SubResource("AtlasTexture_5vyqn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jqm7g")
+text = "Training"
+
 [node name="MarginContainer" type="MarginContainer" parent="StartScreen/VBoxContainer/GameConfig"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="StartGame" type="Button" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer"]
+layout_mode = 2
+
+[node name="StartGame" type="Button" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ffibw")
 theme_override_font_sizes/font_size = 16
@@ -630,6 +647,23 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_s2eoy")
 shortcut = SubResource("Shortcut_vlcq2")
 text = "Start"
 
+[node name="Control" type="Control" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Disclaimer" type="Label" parent="StartScreen/VBoxContainer/GameConfig/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score will not be saved in training mode"
+label_settings = SubResource("LabelSettings_xounv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="pressed" from="GameContainer/VBoxContainer/HBoxContainer/Control/MiddleText/VBoxContainer/GameOver/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/RotateLeftButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_rotate_left_button_pressed"]
 [connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/HardDropButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_hard_drop_button_pressed"]
@@ -639,4 +673,5 @@ text = "Start"
 [connection signal="button_up" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/SoftDropButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_soft_drop_button_button_up"]
 [connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/GridContainer/MoveRightButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_move_right_button_pressed"]
 [connection signal="pressed" from="GameContainer/VBoxContainer/ButtonPanel/HBoxContainer/CenterContainer/HoldButton" to="GameContainer/VBoxContainer/HBoxContainer/Control/Game" method="_on_hold_button_pressed"]
-[connection signal="pressed" from="StartScreen/VBoxContainer/GameConfig/MarginContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="toggled" from="StartScreen/VBoxContainer/GameConfig/MarginContainer2/VBoxContainer/TrainingMode" to="." method="_on_training_mode_toggled"]
+[connection signal="pressed" from="StartScreen/VBoxContainer/GameConfig/MarginContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
