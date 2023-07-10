@@ -3,6 +3,7 @@ extends Label
 
 var level := 1
 var line_left := 0
+var training_mode := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,8 +14,17 @@ func _ready() -> void:
 
 func _on_line_clear(line_left_: int) -> void:
 	line_left = line_left_
-	text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
+	if training_mode:
+		text = "Level " + str(level) + " :\n" + str(line_left) + " lines cleared"
+	else:
+		text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
 
-func _on_level_up(new_level: int, _training_mode: bool = false) -> void:
+func _on_level_up(new_level: int, training_mode_: bool = false) -> void:
+	if training_mode_:
+		training_mode = true
+	
 	level = new_level
-	text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
+	if training_mode:
+		text = "Level " + str(level) + " :\n" + str(line_left) + " lines cleared"
+	else:
+		text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
