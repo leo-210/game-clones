@@ -17,15 +17,20 @@ func _on_next_piece(bag: Array[int]) -> void:
 	for i in range(PREVIEW_LENGTH):
 		var piece: Dictionary = Blocks.blocks[bag[len(bag) - i - 1]]
 		
-		var rotation_ := 0
+		var y_offset := 0
 		if piece in [
 				Blocks.blocks[Blocks.NAMES.J], 
 				Blocks.blocks[Blocks.NAMES.L], 
 				Blocks.blocks[Blocks.NAMES.Z], 
 				Blocks.blocks[Blocks.NAMES.S],
-				Blocks.blocks[Blocks.NAMES.T]
+				Blocks.blocks[Blocks.NAMES.T],
 		]:
-			rotation_ = 2
-		for j in range(len(piece["rotations"][rotation_])):
-			if piece["rotations"][rotation_][j] == 1:
-				tile_map.set_cell(0, Vector2i(j % 4 + 1, j / 4 + 1 + 3 * i), 0, Vector2i(piece["color"], 0))
+			y_offset = 1
+		for j in range(len(piece["rotations"][0])):
+			if piece["rotations"][0][j] == 1:
+				tile_map.set_cell(
+						0,
+						Vector2i(j % 4 + 1, j / 4 + 1 + 3 * i + y_offset), 
+						0, 
+						Vector2i(piece["color"], 0)
+				)
