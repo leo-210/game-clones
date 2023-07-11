@@ -89,7 +89,7 @@ func _on_game_over(score: int) -> void:
 	if len(highscore_history) > 5:
 		highscore_history.resize(5)
 	
-	config.set_value("game_config", "highscore_history", highscore_history)
+	config.set_value("scores", "highscore_history", highscore_history)
 	config.save("user://config.cfg")
 
 
