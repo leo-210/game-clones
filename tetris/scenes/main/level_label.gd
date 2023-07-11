@@ -9,7 +9,7 @@ var training_mode := false
 func _ready() -> void:
 	EventBus.line_clear.connect(_on_line_clear)
 	EventBus.level_up.connect(_on_level_up)
-	EventBus.init_game.connect(_on_level_up)
+	EventBus.init_game.connect(_on_game_init)
 
 
 func _on_line_clear(line_left_: int) -> void:
@@ -19,12 +19,17 @@ func _on_line_clear(line_left_: int) -> void:
 	else:
 		text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
 
-func _on_level_up(new_level: int, training_mode_: bool = false) -> void:
-	if training_mode_:
-		training_mode = true
-	
+func _on_level_up(new_level: int) -> void:
 	level = new_level
 	if training_mode:
 		text = "Level "
 	else:
 		text = "Level " + str(level) + " :\n" + str(line_left) + " lines left"
+
+func _on_game_init(new_level: int, training_mode_: bool) -> void:
+	level = new_level
+	line_left = 10 * level 
+	if training_mode_:
+		training_mode = true
+	
+	_on_level_up(level)

@@ -370,12 +370,12 @@ func _on_game_over(score: int) -> void:
 
 
 func _on_game_init(level_: int, training_mode_: bool) -> void:
+	level = level_
 	training_mode = training_mode_
 	if training_mode:
 		lines_left = 0
 	else:
 		lines_left = LINES_PER_LEVEL * level
-	level = level_
 	speed = pow(0.8 - ((level-1) * 0.007), level-1)
 	game_initialized = true
 	spawn_piece()
