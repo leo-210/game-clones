@@ -14,10 +14,10 @@ Swipe in the direction you want to turn to. You do not need to release your fing
 
 ### Keyboard
 
-- **Right / D**
-- **Left / A**
-- **Up / W** : hard drop *(locking, might change)*
-- **Down / S** : soft drop *(non-locking)*.
+- **Right / D** : move to the right
+- **Left / A** : move to the left
+- **Up / W** : move up
+- **Down / S** : move down
 
 *You do not need to change your keyboard layout in case you're not in QWERTY. For example, if you have the 
 french layout AZERTY, instead of pressing the Z key, you should press the W key.*
