@@ -24,8 +24,7 @@ const MINIMUM_DRAG_DELAY: float = 0.05
 # In cells per second
 @export_range(0, 30) var SPEED: float = 7.0
 
-@onready var grid: TileMap = $SubViewportContainer/SubViewport/Grid
-@onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
+@onready var grid: TileMap = $Grid
 @onready var game_over_delay: Timer = $GameOverDelay
 @onready var color_rect: ColorRect = $ColorRect
 @onready var center_container: CenterContainer = $CenterContainer
@@ -51,9 +50,7 @@ var viewport_size: Vector2
 
 
 func _ready() -> void:
-	sub_viewport.size_2d_override = get_viewport_rect().size.normalized() * 17
-	
-	viewport_size = sub_viewport.size_2d_override
+	viewport_size = grid.local_to_map(get_viewport_rect().size)
 	
 	for i in range(viewport_size.x):
 		for j in range(viewport_size.y):

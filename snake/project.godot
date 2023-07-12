@@ -20,6 +20,10 @@ config/windows_native_icon="res://assets/icon.ico"
 
 [display]
 
+window/size/viewport_width=960
+window/size/viewport_height=960
+window/size/window_width_override=500
+window/size/window_height_override=500
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=5
