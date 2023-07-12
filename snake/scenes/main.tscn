@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4scyuyh0ff2h"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_8c30e"]
+[ext_resource type="Texture2D" uid="uid://l8apptmktjql" path="res://assets/colors.png" id="2_dgrbd"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5ogbj"]
+polygon = PackedVector2Array(0.994369, 0.988845, 0.994369, -0.0165728, 0.0110486, 0.00552428, 0, 0.5, 0, 0.988845)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xospx"]
+polygon = PackedVector2Array(0.994369, 0.988845, 0.994369, -0.0165728, 0.0110486, 0.00552428, 0, 0.5, 0, 0.988845)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cey0"]
+texture = ExtResource("2_dgrbd")
+texture_region_size = Vector2i(1, 1)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_5ogbj")
+1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_xospx")
+
+[sub_resource type="TileSet" id="TileSet_51p5j"]
+tile_size = Vector2i(1, 1)
+occlusion_layer_0/light_mask = 1
+sources/0 = SubResource("TileSetAtlasSource_6cey0")
+
+[sub_resource type="LabelSettings" id="LabelSettings_iavyp"]
+font_size = 64
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a60jy"]
+font_size = 32
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2i52o"]
+font_size = 20
+font_color = Color(0.713726, 0.713726, 0.713726, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8c30e")
+SPEED = 5.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override = Vector2i(10, 10)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Grid" type="TileMap" parent="SubViewportContainer/SubViewport"]
+tile_set = SubResource("TileSet_51p5j")
+format = 2
+layer_0/name = "snake"
+layer_1/name = "apple"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.0235294)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_iavyp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Length" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Final length : 100"
+label_settings = SubResource("LabelSettings_a60jy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TapToContinue" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tap to continue"
+label_settings = SubResource("LabelSettings_2i52o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverDelay" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
